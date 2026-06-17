@@ -5,28 +5,28 @@ export default function CostEstimator({ plannerCctvs, plannerPhones }) {
   const [selectedService, setSelectedService] = useState('web_dev');
   
   // Service configuration states
-  const [webDevScale, setWebDevScale] = useState('medium'); // small ($1200), medium ($3500), large ($7500)
-  const [webDevDb, setWebDevDb] = useState(true); // +$600
-  const [webDevAuth, setWebDevAuth] = useState(false); // +$500
+  const [webDevScale, setWebDevScale] = useState('medium'); // small (5000), medium (8500), large (15000)
+  const [webDevDb, setWebDevDb] = useState(true); // +600 ksh
+  const [webDevAuth, setWebDevAuth] = useState(false); // +500 ksh
 
-  const [webDesignPages, setWebDesignPages] = useState(5); // $150 per page
-  const [webDesignAnimations, setWebDesignAnimations] = useState(true); // +$400
+  const [webDesignPages, setWebDesignPages] = useState(5); // 250 ksh per page
+  const [webDesignAnimations, setWebDesignAnimations] = useState(true); // +400 ksh
 
-  const [uiUxScale, setUiUxScale] = useState('medium'); // small ($800), medium ($2000), large ($4500)
-  const [uiUxPrototype, setUiUxPrototype] = useState(true); // +$300
+  const [uiUxScale, setUiUxScale] = useState('medium'); // small (800 ksh), medium (2000 ksh), large (4500 ksh)
+  const [uiUxPrototype, setUiUxPrototype] = useState(true); // +300 ksh
 
-  const [posRegisters, setPosRegisters] = useState(1); // $1000 base, +$500 per additional register
-  const [posInventory, setPosInventory] = useState(true); // +$600
+  const [posRegisters, setPosRegisters] = useState(1); // 1000 ksh base, +500 ksh per additional register
+  const [posInventory, setPosInventory] = useState(true); // +600 ksh
 
-  const [networkNodes, setNetworkNodes] = useState(12); // $80 per node
-  const [networkServer, setNetworkServer] = useState(false); // +$1200
-  const [networkFirewall, setNetworkFirewall] = useState(true); // +$500
+  const [networkNodes, setNetworkNodes] = useState(12); // 500 ksh per node
+  const [networkServer, setNetworkServer] = useState(false); // +1200 ksh
+  const [networkFirewall, setNetworkFirewall] = useState(true); // +500 ksh
 
-  const [cctvCams, setCctvCams] = useState(8); // $180 per camera
-  const [cctvStorage, setCctvStorage] = useState('2tb'); // 1tb ($150), 2tb ($250), 4tb ($450)
+  const [cctvCams, setCctvCams] = useState(8); // 800 ksh per camera
+  const [cctvStorage, setCctvStorage] = useState('2tb'); // 1tb (120 ksh), 2tb (220 ksh), 4tb (400 ksh)
 
-  const [ipPhonesLines, setIpPhonesLines] = useState(4); // $120 per extension line
-  const [ipPhonesIvr, setIpPhonesIvr] = useState(true); // +$450
+  const [ipPhonesLines, setIpPhonesLines] = useState(4); // 130 ksh per extension line
+  const [ipPhonesIvr, setIpPhonesIvr] = useState(true); // +450 ksh
 
   // Calculation Result
   const [totalPrice, setTotalPrice] = useState(0);
@@ -51,28 +51,28 @@ export default function CostEstimator({ plannerCctvs, plannerPhones }) {
     let cost = 0;
     switch (selectedService) {
       case 'web_dev':
-        const devBase = webDevScale === 'small' ? 1500 : webDevScale === 'medium' ? 3500 : 7500;
+        const devBase = webDevScale === 'small' ? 5000 : webDevScale === 'medium' ? 8500 : 15000;
         cost = devBase + (webDevDb ? 600 : 0) + (webDevAuth ? 500 : 0);
         break;
       case 'web_design':
-        cost = (webDesignPages * 150) + (webDesignAnimations ? 400 : 0) + 500; // $500 setup
+        cost = (webDesignPages * 1000) + (webDesignAnimations ? 500 : 0) + 500; // 500 ksh setup
         break;
       case 'ui_ux':
-        const uiBase = uiUxScale === 'small' ? 800 : uiUxScale === 'medium' ? 2000 : 4500;
+        const uiBase = uiUxScale === 'small' ? 1500 : uiUxScale === 'medium' ? 3000 : 4500;
         cost = uiBase + (uiUxPrototype ? 300 : 0);
         break;
       case 'pos_dev':
-        cost = 1200 + (posRegisters * 450) + (posInventory ? 600 : 0);
+        cost = 5000 + (posRegisters * 1500) + (posInventory ? 1200 : 0);
         break;
       case 'network_support':
-        cost = (networkNodes * 85) + (networkServer ? 1200 : 0) + (networkFirewall ? 500 : 0);
+        cost = (networkNodes * 500) + (networkServer ? 1200 : 0) + (networkFirewall ? 500 : 0);
         break;
       case 'cctv_install':
-        const hddCost = cctvStorage === '1tb' ? 120 : cctvStorage === '2tb' ? 220 : 400;
-        cost = (cctvCams * 190) + hddCost + 400; // $400 DVR/Setup base
+        const hddCost = cctvStorage === '1tb' ? 3500 : cctvStorage === '2tb' ? 7000 : 10000;
+        cost = (cctvCams * 500) + hddCost + 4000; // 4000 ksh DVR/Setup base
         break;
       case 'ip_phone':
-        cost = (ipPhonesLines * 130) + (ipPhonesIvr ? 450 : 0) + 300; // $300 PBX setup base
+        cost = (ipPhonesLines * 500) + (ipPhonesIvr ? 450 : 0) + 300; // 300 ksh PBX setup base
         break;
       default:
         cost = 0;
@@ -288,11 +288,11 @@ export default function CostEstimator({ plannerCctvs, plannerPhones }) {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '0.9rem' }}>
                       <input type="checkbox" checked={webDevDb} onChange={(e) => setWebDevDb(e.target.checked)} style={{ width: '16px', height: '16px' }} />
-                      <span>Database & Schema Configuration (+$600)</span>
+                      <span>Database & Schema Configuration (+1000 ksh)</span>
                     </label>
                     <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '0.9rem' }}>
                       <input type="checkbox" checked={webDevAuth} onChange={(e) => setWebDevAuth(e.target.checked)} style={{ width: '16px', height: '16px' }} />
-                      <span>Admin/Member Authentication Portal (+$500)</span>
+                      <span>Admin/Member Authentication Portal (+1200 ksh)</span>
                     </label>
                   </div>
                 </>
@@ -317,7 +317,7 @@ export default function CostEstimator({ plannerCctvs, plannerPhones }) {
                   </div>
                   <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '0.9rem' }}>
                     <input type="checkbox" checked={webDesignAnimations} onChange={(e) => setWebDesignAnimations(e.target.checked)} style={{ width: '16px', height: '16px' }} />
-                    <span>Include Framer Motion Interactions (+$400)</span>
+                    <span>Include Framer Motion Interactions (+800 ksh)</span>
                   </label>
                 </>
               )}
@@ -343,7 +343,7 @@ export default function CostEstimator({ plannerCctvs, plannerPhones }) {
                   </div>
                   <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '0.9rem' }}>
                     <input type="checkbox" checked={uiUxPrototype} onChange={(e) => setUiUxPrototype(e.target.checked)} style={{ width: '16px', height: '16px' }} />
-                    <span>Clickable Figma Prototype (+$300)</span>
+                    <span>Clickable Figma Prototype (+500 ksh)</span>
                   </label>
                 </>
               )}
@@ -367,7 +367,7 @@ export default function CostEstimator({ plannerCctvs, plannerPhones }) {
                   </div>
                   <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '0.9rem' }}>
                     <input type="checkbox" checked={posInventory} onChange={(e) => setPosInventory(e.target.checked)} style={{ width: '16px', height: '16px' }} />
-                    <span>Cloud Sync & Inventory Module (+$600)</span>
+                    <span>Cloud Sync & Inventory Module (+2000 ksh)</span>
                   </label>
                 </>
               )}
@@ -392,11 +392,11 @@ export default function CostEstimator({ plannerCctvs, plannerPhones }) {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '0.9rem' }}>
                       <input type="checkbox" checked={networkServer} onChange={(e) => setNetworkServer(e.target.checked)} style={{ width: '16px', height: '16px' }} />
-                      <span>Dedicated Server Rack Assembly (+$1200)</span>
+                      <span>Dedicated Server Rack Assembly (+1200 ksh)</span>
                     </label>
                     <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '0.9rem' }}>
                       <input type="checkbox" checked={networkFirewall} onChange={(e) => setNetworkFirewall(e.target.checked)} style={{ width: '16px', height: '16px' }} />
-                      <span>Hardware Firewall & VPN configuration (+$500)</span>
+                      <span>Hardware Firewall & VPN configuration (+1500 ksh)</span>
                     </label>
                   </div>
                 </>
@@ -431,9 +431,9 @@ export default function CostEstimator({ plannerCctvs, plannerPhones }) {
                       onChange={(e) => setCctvStorage(e.target.value)}
                       style={{ padding: '10px', borderRadius: '6px', background: '#ffffff', color: 'hsl(var(--text-main))', border: '1px solid rgba(0,0,0,0.12)' }}
                     >
-                      <option value="1tb">1 TB CCTV Surveillance HDD (+$120)</option>
-                      <option value="2tb">2 TB CCTV Surveillance HDD (+$220)</option>
-                      <option value="4tb">4 TB CCTV Surveillance HDD (+$400)</option>
+                      <option value="1tb">1 TB CCTV Surveillance HDD (+3500 ksh)</option>
+                      <option value="2tb">2 TB CCTV Surveillance HDD (+7000 ksh)</option>
+                      <option value="4tb">4 TB CCTV Surveillance HDD (+1000 ksh)</option>
                     </select>
                   </div>
                 </>
@@ -463,7 +463,7 @@ export default function CostEstimator({ plannerCctvs, plannerPhones }) {
                   </div>
                   <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '0.9rem' }}>
                     <input type="checkbox" checked={ipPhonesIvr} onChange={(e) => setIpPhonesIvr(e.target.checked)} style={{ width: '16px', height: '16px' }} />
-                    <span>Automated Voice Receptionist & Queuing (+$450)</span>
+                    <span>Automated Voice Receptionist & Queuing (+4500 ksh)</span>
                   </label>
                 </>
               )}
@@ -488,9 +488,9 @@ export default function CostEstimator({ plannerCctvs, plannerPhones }) {
               </span>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', margin: '8px 0' }}>
                 <span style={{ fontSize: '3rem', fontWeight: 800, color: 'hsl(var(--text-main))' }} className="text-gradient">
-                  ${totalPrice.toLocaleString()}
+                  {totalPrice.toLocaleString()}ksh
                 </span>
-                <span style={{ color: 'hsl(var(--text-dim))', fontSize: '0.9rem' }}>USD</span>
+                <span style={{ color: 'hsl(var(--text-dim))', fontSize: '0.9rem' }}>Ksh</span>
               </div>
               <p style={{ fontSize: '0.8rem', color: 'hsl(var(--text-muted))', lineHeight: '1.4' }}>
                 *This is an approximate engineering estimate covering baseline hardware and installation labor. Actual quote may shift after physical site survey.
