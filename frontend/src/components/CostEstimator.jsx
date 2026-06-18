@@ -138,7 +138,7 @@ export default function CostEstimator({ plannerCctvs, plannerPhones }) {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/estimates', {
+      const response = await fetch('/api/estimates', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

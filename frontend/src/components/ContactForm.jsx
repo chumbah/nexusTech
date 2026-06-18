@@ -30,7 +30,7 @@ export default function ContactForm() {
     setErrorMsg('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/inquiries', {
+      const response = await fetch('/api/inquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
