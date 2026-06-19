@@ -6,6 +6,7 @@ require("dotenv").config();
 const app = express();
 
 const PORT = process.env.PORT || 5000;
+const API_URL = import.meta.env.VITE_API_URL;
 
 app.use(cors());
 app.use(express.json());
@@ -43,7 +44,7 @@ function verifyAdminToken(req, res, next) {
 // INQUIRIES
 // ==========================
 
-app.post("/api/inquiries", async (req, res) => {
+app.post(`${API_URL}/api/inquiries`, async (req, res) => {
   try {
     const { name, email, phone, company, message, service_type } = req.body;
 
@@ -79,7 +80,7 @@ app.post("/api/inquiries", async (req, res) => {
 // ESTIMATES
 // ==========================
 
-app.post("/api/estimates", async (req, res) => {
+app.post(`${API_URL}/api/estimates`, async (req, res) => {
   try {
     const { name, email, phone, items_selected, total_price } = req.body;
 
@@ -114,7 +115,7 @@ app.post("/api/estimates", async (req, res) => {
 // ADMIN LOGIN
 // ==========================
 
-app.post("/api/admin/login", async (req, res) => {
+app.post(`${API_URL}/api/admin/login`, async (req, res) => {
   try {
     const { username, password } = req.body;
 
@@ -143,7 +144,7 @@ app.post("/api/admin/login", async (req, res) => {
 // ADMIN DATA
 // ==========================
 
-app.get("/api/admin/inquiries", verifyAdminToken, async (req, res) => {
+app.get(`${API_URL}/api/admin/inquiries`, verifyAdminToken, async (req, res) => {
   const data = await db.getAllInquiries();
 
   res.json({
@@ -152,7 +153,7 @@ app.get("/api/admin/inquiries", verifyAdminToken, async (req, res) => {
   });
 });
 
-app.get("/api/admin/estimates", verifyAdminToken, async (req, res) => {
+app.get(`${API_URL}/api/admin/estimates`, verifyAdminToken, async (req, res) => {
   const data = await db.getAllEstimates();
 
   res.json({

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Calculator, Sparkles, Send, CheckCircle2 } from 'lucide-react';
 
+
 export default function CostEstimator({ plannerCctvs, plannerPhones }) {
   const [selectedService, setSelectedService] = useState('web_dev');
   
@@ -30,6 +31,9 @@ export default function CostEstimator({ plannerCctvs, plannerPhones }) {
 
   // Calculation Result
   const [totalPrice, setTotalPrice] = useState(0);
+
+
+  const API_URL = import.meta.env.VITE_API_URL;
 
   // Sync counts from Floor Planner when they change
   useEffect(() => {
@@ -138,7 +142,7 @@ export default function CostEstimator({ plannerCctvs, plannerPhones }) {
     }
 
     try {
-      const response = await fetch('/api/estimates', {
+      const response = await fetch(`${API_URL}/api/estimates`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
