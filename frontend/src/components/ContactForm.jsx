@@ -15,12 +15,13 @@ export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const API_URL = import.meta.env.VITE_API_URL;
+  
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
+    const API_URL = import.meta.env.VITE_API_URL;
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
       setErrorMsg('Name, Email, and Message are required.');

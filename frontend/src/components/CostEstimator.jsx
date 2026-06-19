@@ -33,7 +33,7 @@ export default function CostEstimator({ plannerCctvs, plannerPhones }) {
   const [totalPrice, setTotalPrice] = useState(0);
 
 
-  const API_URL = import.meta.env.VITE_API_URL;
+  
 
   // Sync counts from Floor Planner when they change
   useEffect(() => {
@@ -107,6 +107,7 @@ export default function CostEstimator({ plannerCctvs, plannerPhones }) {
 
   const handleSubmitEstimate = async (e) => {
     e.preventDefault();
+    const API_URL = import.meta.env.VITE_API_URL;
     if (!formData.name || !formData.email) {
       setErrorMsg('Name and Email are required to request a quote.');
       return;
